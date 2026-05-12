@@ -1,0 +1,139 @@
+import pandas as pd
+import numpy as np
+from sklearn import preprocessing
+
+csv_url = 'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'
+col_names = ['Sepal_Length', 'Sepal_Width', 'Petal_Length', 'Petal_Width', 'Species']
+df = pd.read_csv(csv_url, names=col_names)
+
+print(df.head())
+print(df.tail())
+print(df.shape)
+print(df.dtypes)
+print(df.describe(include='all'))
+print(df.isnull().sum())
+print(df.isnull().sum().sum())
+
+print(df.iloc[3:5, 0:2])
+print(df.iloc[[1,2,4], [0,2]])
+print(df.iloc[1:3, :])
+print(df.iloc[:, 1:3])
+
+df['Petal_Length'] = df['Petal_Length'].astype("int")
+
+min_max_scaler = preprocessing.MinMaxScaler()
+x = df.iloc[:, :4]
+x_scaled = min_max_scaler.fit_transform(x)
+df_normalized = pd.DataFrame(x_scaled)
+print(df_normalized)
+
+label_encoder = preprocessing.LabelEncoder()
+df['Species'] = label_encoder.fit_transform(df['Species'])
+print(df['Species'].unique())
+
+features_df = df.drop(columns=['Species'])
+enc = preprocessing.OneHotEncoder()
+enc_df = pd.DataFrame(enc.fit_transform(df[['Species']]).toarray())
+df_encode = features_df.join(enc_df)
+df_encode.rename(columns={0:'Iris-Setosa', 1:'Iris-Versicolor', 2:'Iris-virginica'}, inplace=True)
+print(df_encode)
+
+one_hot_df = pd.get_dummies(df, prefix="Species", columns=['Species'], drop_first=True)
+print(one_hot_df)
+
+
+#explanation
+Title
+
+Data Preprocessing on Iris Dataset using Python
+
+Objective
+To learn basic data preprocessing techniques.
+To perform normalization and encoding on the Iris dataset.
+To prepare data for Machine Learning.
+
+Simple Theory
+
+This program performs different preprocessing operations on the Iris dataset using Python.
+
+First, the dataset is loaded using the Pandas library. The dataset contains flower information such as sepal length, sepal width, petal length, petal width, and species name.
+
+The program displays:
+
+First records
+Last records
+Shape of dataset
+Datatypes
+Statistical information
+
+Then it checks whether the dataset contains any missing (null) values.
+
+After that, some rows and columns are selected using iloc.
+
+The datatype of the Petal_Length column is converted into integer format.
+
+Next, normalization is performed using Min-Max Scaling. This scales all values between 0 and 1.
+
+Normalization Formula:
+
+	 x-x min
+  x′=   ----------
+   	xmax-xmin
+	​
+
+The program also performs:
+
+Label Encoding → Converts text labels into numbers.
+One Hot Encoding → Converts categorical values into binary columns.
+
+These preprocessing techniques help prepare the dataset for Machine Learning algorithms.
+
+Simple Algorithm
+Step 1:
+
+Import required libraries.
+
+Step 2:
+
+Load the Iris dataset.
+
+Step 3:
+
+Assign column names.
+
+Step 4:
+
+Display dataset information using:
+
+head()
+tail()
+shape
+dtypes
+describe()
+Step 5:
+
+Check missing values.
+
+Step 6:
+
+Select rows and columns using iloc.
+
+Step 7:
+
+Convert datatype of Petal_Length into integer.
+
+Step 8:
+
+Apply Min-Max Normalization.
+
+Step 9:
+
+Apply Label Encoding on Species column.
+
+Step 10:
+
+Apply One Hot Encoding.
+
+Step 11:
+
+Display final processed dataset.

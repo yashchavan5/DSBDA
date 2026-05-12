@@ -1,0 +1,206 @@
+Cell 1: Importing Libraries
+Pythonimport pandas as pd
+import numpy as np
+Explanation:
+
+import pandas as pd: Imports the Pandas library (used for data analysis and manipulation) and gives it alias pd.
+import numpy as np: Imports the NumPy library (used for numerical computations) and gives it alias np.
+
+
+Cell 2: Loading the Dataset
+Pythondf = pd.read_csv("C:/Users/TEJAS GAIKWAD/Downloads/data.csv")
+Explanation:
+
+Reads a CSV file from the given path and stores it in a pandas DataFrame called df.
+pd.read_csv() is the most common function to load tabular data.
+
+
+Cell 3: Displaying the DataFrame
+Pythondf
+Explanation:
+
+Simply typing the DataFrame name in a Jupyter cell displays the entire dataset (first and last few rows).
+
+
+Cell 4: Basic Information about Dataset
+Pythondf.info()
+Explanation:
+
+Displays:
+Number of rows and columns
+Column names
+Data types (int64, float64, object)
+Count of non-null values
+Memory usage
+
+
+Output Summary: 116 rows, 10 columns, no missing values.
+
+Cell 5: First 10 Rows
+Pythondf.head(10)
+Explanation:
+
+head(n) returns the first n rows. Here it shows the top 10 records. Useful to see the structure and sample data.
+
+
+Cell 6: Last 5 Rows
+Pythondf.tail()
+Explanation:
+
+tail() returns the last 5 rows by default. Helps check the end of the dataset.
+
+
+Cell 7: Statistical Summary
+Pythondf.describe()
+Explanation:
+
+Gives statistical summary of numerical columns only:
+Count, Mean, Std, Min, 25%, 50% (Median), 75%, Max
+
+Very important for understanding data distribution.
+
+
+Cell 8: Checking Null Values (Boolean Matrix)
+Pythondf.isnull()
+Explanation:
+
+Returns a DataFrame of True/False where True means the value is missing (NaN).
+
+
+Cell 9: Count of Missing Values
+Pythondf.isna().sum()
+Explanation:
+
+isna() is same as isnull()
+.sum() counts total missing values in each column.
+Good news: All columns have 0 missing values.
+
+
+Cell 10 & 11: Incorrect Fillna Attempt
+Pythonx = df.fillna(min("Age"))
+Explanation:
+
+This is wrong code.
+min("Age") treats "Age" as a string and tries to find minimum character → Error or unexpected result.
+You probably wanted df['Age'].min()
+
+
+Cell 12 & 13: Finding Min & Max Age
+Pythondf.Age.min()
+df.Age.max()
+Explanation:
+
+Returns minimum and maximum value in the Age column.
+
+
+Cell 14: Viewing Age Column (after wrong fillna)
+Pythonx.Age
+Explanation:
+
+Trying to see the Age column from the incorrectly filled DataFrame x.
+
+
+Cell 15: Dropping Missing Values
+Pythondf.dropna()
+Explanation:
+
+Removes rows with any missing values.
+Since there are no missing values, it returns the same DataFrame.
+
+
+Cell 16: Displaying DataFrame Again
+Pythondf
+Explanation:
+
+Re-displaying the DataFrame.
+
+
+Cell 17: Info Again
+Pythondf.info()
+Explanation:
+
+Re-checking structure after operations.
+
+
+Cell 18: First 5 Rows Again
+Pythondf.head()
+Explanation:
+
+Standard way to peek at top 5 rows.
+
+
+Cell 19: Last 7 Rows
+Pythondf.tail(7)
+Explanation:
+
+Shows last 7 rows.
+
+
+Cell 20: Checking Non-Null Values
+Pythondf.notnull()
+Explanation:
+
+Opposite of isnull(). Returns True for valid (non-null) values.
+
+
+Cell 21: Statistical Summary Again
+Pythondf.describe()
+Explanation:
+
+Repeated statistical summary.
+
+
+Cell 22: Minimum Values of All Columns
+Pythondf.min()
+Explanation:
+
+Returns minimum value for each column.
+
+
+Cell 23: Maximum Values of All Columns
+Pythondf.max()
+Explanation:
+
+Returns maximum value for each column.
+
+
+Cell 24: Minimum Age
+Pythondf.Age.min()
+Explanation:
+
+Minimum value in Age column.
+
+
+Cell 25: Dropping NaN (Again)
+Pythondf.dropna()
+Explanation:
+
+Repeated (no effect).
+
+
+Cell 26: Fillna with 0
+Pythondf.fillna(0)
+Explanation:
+
+Fills all missing values (if any) with 0.
+(No effect here as there are no missing values.)
+
+
+Cell 27–29: Central Tendency Measures
+Pythondf.Age.mean()
+df.Age.median()
+df.Age.mode()
+Explanation:
+
+mean() → Average age
+median() → Middle value when sorted
+mode() → Most frequent age (45 in this dataset)
+
+
+
+Summary of Your Notebook:
+
+You successfully loaded and explored a Breast Cancer / Obesity / Metabolic Dataset (116 records).
+No missing values found.
+You explored basic pandas functions: head(), tail(), info(), describe(), isnull(), min(), max(), mean(), etc.
+Some small mistakes (like fillna(min("Age"))).

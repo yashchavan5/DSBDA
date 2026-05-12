@@ -1,0 +1,16 @@
+import pandas as pd
+data=pd.read_csv("")
+data.head()
+data.columns
+data.info()
+data[['raisedhands','VisITedResources','AnnouncementsView']]
+
+import seaborn as sns
+sns.boxplot(data['raisehands'])
+<Axes: ylabel='raisedhands'>
+
+sns.boxplot(data['VisITedResources'])
+<Axes: ylabel='VisITedResources'>
+
+sns.boxplot(data['AnnouncementsView'])
+<Axes: ylabel='AnnouncementsView'>
